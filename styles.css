@@ -7,7 +7,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: #E5E5E5;
+    background: #F5F5F5;
     min-height: 100vh;
     padding: 20px;
     display: flex;
@@ -26,50 +26,50 @@ body {
 header {
     text-align: center;
     margin-bottom: 30px;
-    color: white;
+    color: #1A1A1A;
 }
 
 h1 {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 8px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #1A1A1A;
 }
 
 .subtitle {
     font-size: 14px;
-    opacity: 0.9;
+    color: #666666;
     font-weight: 400;
 }
 
 .payment-info {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
+    background: white;
+    border-radius: 12px;
     padding: 16px 20px;
     margin-bottom: 24px;
     text-align: center;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #1A1A1A;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .business-name {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 8px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #1A1A1A;
 }
 
 .payment-amount {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 6px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #1A1A1A;
 }
 
 .payment-desc {
     font-size: 14px;
-    opacity: 0.9;
+    color: #666666;
     margin-top: 4px;
 }
 
@@ -82,8 +82,8 @@ h1 {
 
 .payment-card {
     background: white;
-    border: none;
-    border-radius: 16px;
+    border: 1px solid #E5E5E5;
+    border-radius: 12px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -91,8 +91,8 @@ h1 {
     justify-content: center;
     gap: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     min-height: 140px;
     touch-action: manipulation;
     -webkit-touch-callout: none;
@@ -100,40 +100,15 @@ h1 {
     user-select: none;
 }
 
-/* Pastel colors for each payment method */
-.payment-card[data-payment="payme"] {
-    background: #FFD3D3;
-}
-
-.payment-card[data-payment="click"] {
-    background: #D3FFE8;
-}
-
-.payment-card[data-payment="uzum"] {
-    background: #E8D3FF;
-}
-
-.payment-card[data-payment="paynet"] {
-    background: #D3E8FF;
-}
-
-.payment-card[data-payment="apelsin"] {
-    background: #FFE8D3;
-}
-
-.payment-card[data-payment="humo"] {
-    background: #D3FFD3;
-}
-
 .payment-card:active {
-    transform: scale(0.95);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: scale(0.98);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .payment-card:hover {
+    border-color: #3B82F6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
-    filter: brightness(1.05);
 }
 
 .icon-wrapper {
@@ -161,14 +136,13 @@ h1 {
 .payment-name {
     font-size: 16px;
     font-weight: 600;
-    color: #333;
+    color: #1A1A1A;
     text-align: center;
 }
 
 footer {
     text-align: center;
-    color: white;
-    opacity: 0.8;
+    color: #666666;
 }
 
 .footer-text {
