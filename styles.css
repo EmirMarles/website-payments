@@ -92,7 +92,7 @@ h1 {
     gap: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
     min-height: 140px;
     touch-action: manipulation;
     -webkit-touch-callout: none;
@@ -100,14 +100,40 @@ h1 {
     user-select: none;
 }
 
+/* Pastel colors for each payment method */
+.payment-card[data-payment="payme"] {
+    background: #FFD3D3;
+}
+
+.payment-card[data-payment="click"] {
+    background: #D3FFE8;
+}
+
+.payment-card[data-payment="uzum"] {
+    background: #E8D3FF;
+}
+
+.payment-card[data-payment="paynet"] {
+    background: #D3E8FF;
+}
+
+.payment-card[data-payment="apelsin"] {
+    background: #FFE8D3;
+}
+
+.payment-card[data-payment="humo"] {
+    background: #D3FFD3;
+}
+
 .payment-card:active {
     transform: scale(0.95);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .payment-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+    filter: brightness(1.05);
 }
 
 .icon-wrapper {
