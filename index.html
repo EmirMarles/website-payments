@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Payment methods for Uzbekistan - PayMe, Click, Uzum">
+    <title>Payment Methods</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Select Payment Method</h1>
+            <p class="subtitle">Choose a payment method to send money</p>
+        </header>
+        
+        <div class="payment-grid">
+            <button class="payment-card" data-payment="payme">
+                <div class="icon-wrapper">
+                    <svg class="payment-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="20" fill="#FF6B35"/>
+                        <text x="50" y="55" font-size="40" font-weight="bold" fill="white" text-anchor="middle">P</text>
+                    </svg>
+                </div>
+                <span class="payment-name">PayMe</span>
+            </button>
+            
+            <button class="payment-card" data-payment="click">
+                <div class="icon-wrapper">
+                    <svg class="payment-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="20" fill="#00D4AA"/>
+                        <text x="50" y="55" font-size="40" font-weight="bold" fill="white" text-anchor="middle">C</text>
+                    </svg>
+                </div>
+                <span class="payment-name">Click</span>
+            </button>
+            
+            <button class="payment-card" data-payment="uzum">
+                <div class="icon-wrapper">
+                    <svg class="payment-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="20" fill="#7B2CBF"/>
+                        <text x="50" y="55" font-size="40" font-weight="bold" fill="white" text-anchor="middle">U</text>
+                    </svg>
+                </div>
+                <span class="payment-name">Uzum</span>
+            </button>
+            
+            <button class="payment-card" data-payment="paynet">
+                <div class="icon-wrapper">
+                    <svg class="payment-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="20" fill="#0066CC"/>
+                        <text x="50" y="55" font-size="35" font-weight="bold" fill="white" text-anchor="middle">PN</text>
+                    </svg>
+                </div>
+                <span class="payment-name">Paynet</span>
+            </button>
+            
+            <button class="payment-card" data-payment="apelsin">
+                <div class="icon-wrapper">
+                    <svg class="payment-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="20" fill="#FFA500"/>
+                        <text x="50" y="55" font-size="40" font-weight="bold" fill="white" text-anchor="middle">A</text>
+                    </svg>
+                </div>
+                <span class="payment-name">Apelsin</span>
+            </button>
+            
+            <button class="payment-card" data-payment="humo">
+                <div class="icon-wrapper">
+                    <svg class="payment-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="20" fill="#00A86B"/>
+                        <text x="50" y="55" font-size="40" font-weight="bold" fill="white" text-anchor="middle">H</text>
+                    </svg>
+                </div>
+                <span class="payment-name">Humo</span>
+            </button>
+        </div>
+        
+        <footer>
+            <p class="footer-text">Scan QR code from your business app</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
