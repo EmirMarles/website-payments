@@ -28,15 +28,24 @@ const paymentInfo = getUrlParams();
 // Payment configuration - Deep link templates for each payment method
 const paymentConfig = {
     payme: {
-        // PayMe deep link format
+        // PayMe deep link format - Try multiple URL schemes
         buildAppUrl: () => {
             const phone = paymentInfo.paymePhone || paymentInfo.phone;
+            if (!phone) return null;
+            
+            // Build query parameters
             const amount = paymentInfo.amount ? `&amount=${paymentInfo.amount}` : '';
             const desc = paymentInfo.description ? `&description=${encodeURIComponent(paymentInfo.description)}` : '';
-            return `payme://transfer?phone=${encodeURIComponent(phone)}${amount}${desc}`;
+            const query = `phone=${encodeURIComponent(phone)}${amount}${desc}`;
+            
+            // Return URL schemes to try (most common first)
+            // PayMe commonly uses: payme:// or payme.uz://
+            return `payme://transfer?${query}`;
         },
         buildWebUrl: () => {
             const phone = paymentInfo.paymePhone || paymentInfo.phone;
+            if (!phone) return 'https://payme.uz';
+            
             const params = new URLSearchParams({ phone });
             if (paymentInfo.amount) params.append('amount', paymentInfo.amount);
             if (paymentInfo.description) params.append('description', paymentInfo.description);
@@ -190,9 +199,16 @@ function handlePayment(paymentType) {
     const appUrl = config.buildAppUrl();
     const webUrl = config.buildWebUrl();
     
+    // If no app URL, go directly to web
+    if (!appUrl) {
+        window.location.href = webUrl;
+        return;
+    }
+    
     // Mobile-friendly deep linking
     // Try app first, fallback to web after delay
     let appOpened = false;
+    let startTime = Date.now();
     
     // Track if app opens (page loses focus)
     const blurHandler = function() {
@@ -212,19 +228,66 @@ function handlePayment(paymentType) {
     window.addEventListener('blur', blurHandler);
     window.addEventListener('visibilitychange', visibilityHandler);
     
-    // Attempt to open app with pre-filled payment details
-    window.location.href = appUrl;
+    // For PayMe, try multiple URL schemes
+    const urlSchemes = [];
+    if (paymentType === 'payme') {
+        const phone = paymentInfo.paymePhone || paymentInfo.phone;
+        const amount = paymentInfo.amount ? `&amount=${paymentInfo.amount}` : '';
+        const desc = paymentInfo.description ? `&description=${encodeURIComponent(paymentInfo.description)}` : '';
+        const query = `phone=${encodeURIComponent(phone)}${amount}${desc}`;
+        
+        // Try different PayMe URL schemes
+        urlSchemes.push(`payme://transfer?${query}`);
+        urlSchemes.push(`payme.uz://transfer?${query}`);
+        urlSchemes.push(`payme://pay?${query}`);
+        urlSchemes.push(`payme.uz://pay?${query}`);
+    } else {
+        urlSchemes.push(appUrl);
+    }
     
-    // Fallback to web after delay if app didn't open
+    // Try the first URL scheme with iframe (better compatibility)
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.src = urlSchemes[0];
+    document.body.appendChild(iframe);
+    
+    // Also try direct window.location with first scheme
     setTimeout(() => {
         if (!appOpened) {
+            window.location.href = urlSchemes[0];
+        }
+    }, 100);
+    
+    // Try alternative schemes if first one doesn't work (for PayMe)
+    if (paymentType === 'payme' && urlSchemes.length > 1) {
+        setTimeout(() => {
+            if (!appOpened && urlSchemes.length > 1) {
+                // Try second scheme
+                window.location.href = urlSchemes[1];
+            }
+        }, 800);
+    }
+    
+    // Fallback to web after longer delay if app didn't open
+    setTimeout(() => {
+        const elapsed = Date.now() - startTime;
+        if (!appOpened && elapsed > 2000) {
             // Check if still on page
             if (document.hasFocus() && !document.hidden) {
+                document.body.removeChild(iframe);
                 window.location.href = webUrl;
             }
         }
         window.removeEventListener('blur', blurHandler);
         window.removeEventListener('visibilitychange', visibilityHandler);
-    }, 1500);
+        // Clean up iframe after a delay
+        setTimeout(() => {
+            if (iframe.parentNode) {
+                document.body.removeChild(iframe);
+            }
+        }, 1000);
+    }, 2500);
 }
 
