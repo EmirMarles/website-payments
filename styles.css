@@ -7,7 +7,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+    background: #E5E5E5;
     min-height: 100vh;
     padding: 20px;
     display: flex;
